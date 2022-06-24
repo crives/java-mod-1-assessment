@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class StudentGame {
     public static int randInt;
-    public static int start;
-    public static int end;
+    public static int lowerBnd;
+    public static int upperBnd;
     public static String gameLevel;
     public static boolean repeat = true;
     public static boolean won = false;
@@ -31,8 +31,8 @@ public class StudentGame {
     @throws outOfBoundsException for invalid user input
     */
     public static void chooseSkillLevel() {
-        start = 1;
-        end = skillLevels.length;
+        lowerBnd = 1;
+        upperBnd = skillLevels.length;
 
         System.out.println("This game has different skill levels.");
         System.out.println("Each level will have you guess a number against the program's number.");
@@ -56,18 +56,18 @@ public class StudentGame {
                     repeat = false;
                 }
             } catch (Exception e) {
-                outOfBoundsException(start, end);
+                outOfBoundsException(lowerBnd, upperBnd);
                 repeat = true;
             }
         }
     }
 
     public static void game() {
-        start = 0;
-        end = 10;
+        lowerBnd = 0;
+        upperBnd = 10;
 
         while(repeat) {
-            System.out.println("Enter an integer between " + start + " and " + end + ":");
+            System.out.println("Enter an integer between " + lowerBnd + " and " + upperBnd + ":");
 
             try {
                 int userInt = inputScanner.nextInt();
@@ -81,11 +81,13 @@ public class StudentGame {
                     case MEDIUM:
                         won = (userInt > randInt) ? true : 
                             (userInt <= randInt) ? false : true;
+                        break;
                     case HARD:
                         won = (userInt == randInt) ? true : false; 
+                        break;
                 }
 
-                if (userInt > 10 || userInt < 0) {
+                if (userInt > upperBnd || userInt < lowerBnd) {
                     throw new Exception();
                 } else if (won) {
                     printResultsMessage(userInt);
@@ -96,7 +98,7 @@ public class StudentGame {
                 }
 
             } catch (Exception e) {
-                outOfBoundsException(start, end);
+                outOfBoundsException(lowerBnd, upperBnd);
             }
         }
     }
@@ -107,10 +109,10 @@ public class StudentGame {
         System.out.println(message);
     }
 
-    public static void outOfBoundsException(int start, int end) {
+    public static void outOfBoundsException(int lowerBnd, int upperBnd) {
         String str = inputScanner.nextLine();
         System.out.println("|");  
-        System.out.println("**Error!! Please only enter an integer between " + start + " and " + end + "!**");  
+        System.out.println("**Error!! Please only enter an integer between " + lowerBnd + " and " + upperBnd + "!**");  
         System.out.println("|");  
         System.out.println("V");    
     }
