@@ -25,9 +25,11 @@ public class StudentGame {
         return randInt;
     }
 
-    // Loop through array to print out message
-    // Do a switch case to match number with level
-    // Include a try/catch for user input validation
+    /**
+     * 
+    Loops through skill level array to display corresponding instructions
+    @throws outOfBoundsException for invalid user input
+    */
     public static void chooseSkillLevel() {
         start = 1;
         end = skillLevels.length;
@@ -41,14 +43,13 @@ public class StudentGame {
             System.out.println(skillLevels[i]);
         }
 
-        // Do try catch for user input
         while (repeat) {
             System.out.println("");
             System.out.println("Please choose a skill level by typing (1-3) corresponding to the skill level you'd like:");
             try {
                 int chosenSLevel = inputScanner.nextInt();
                 gameLevel = skillLevels[chosenSLevel - 1];
-                if (chosenSLevel < skillLevels.length || chosenSLevel < 1) {
+                if (chosenSLevel > skillLevels.length || chosenSLevel < 1) {
                     throw new Exception();
                 } else {
                     game();
