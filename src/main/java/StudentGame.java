@@ -89,10 +89,7 @@ public class StudentGame {
 
                 if (userInt > upperBnd || userInt < lowerBnd) {
                     throw new Exception();
-                } else if (won) {
-                    printResultsMessage(userInt);
-                    repeat = false;
-                } else if (!won) {
+                } else {
                     printResultsMessage(userInt);
                     repeat = false;
                 }
